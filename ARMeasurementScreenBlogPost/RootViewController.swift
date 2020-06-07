@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RootViewController.swift
 //  ARMeasurementScreenBlogPost
 //
 //  Created by Eray Diler on 24.05.2020.
@@ -8,14 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RootViewController: UIViewController {
     private lazy var measurementView = MeasurementView()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        addMeasurementView()
+    }
+    
+    private func addMeasurementView() {
         view.addSubview(measurementView)
+        
         measurementView.addConstraints(
             equalToSuperview(
                 with: .zero,

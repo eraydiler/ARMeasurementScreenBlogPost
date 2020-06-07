@@ -24,42 +24,19 @@ final class MeasurementView: ARSCNView {
     
     // MARK: - Subviews
     
-    private lazy var undoButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "icon-undo"), for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.setBackgroundImage(UIImage(named: "btn-rectangle-rounded-gray"), for: .normal)
-        button.addTarget(self, action: #selector(notifyDelegateUndoButtonDidTap), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var clearButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Clear", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.setBackgroundImage(UIImage(named: "btn-rectangle-rounded-gray"), for: .normal)
-        button.addTarget(self, action: #selector(notifyDelegateClearButtonDidTap), for: .touchUpInside)
-        return button
-    }()
-    
+    private lazy var undoButton = UIButton()
+    private lazy var clearButton = UIButton()
     private lazy var indicatorNode = SCNNode()
     private lazy var centerDotView = UIImageView(image: UIImage(named: "icon-dot"))
-    private lazy var addButton: UIButton = {
-        let button = UIButton()
-        
-        button.setBackgroundImage(UIImage(named: "btn-add"), for: .normal)
-        button.addTarget(self, action: #selector(notifyDelegateAddButtonDidTap), for: .touchUpInside)
-
-        return button
-    }()
+    private lazy var addButton = UIButton()
     
     // MARK: - Initialization
     
     init() {
         super.init(frame: CGRect.zero, options: [:])
         
-        setupScene()
-        setListeners()
+        customizeAppearance()
+        linkInteractors()
         prepareLayout()
         runSession()
     }
@@ -68,10 +45,48 @@ final class MeasurementView: ARSCNView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+// MARK: Setup
+
+extension MeasurementView {
+    private func customizeAppearance() {
+        customizeScene()
+        customizeUndoButton()
+        customizeClearButton()
+        customizeAddButton()
+    }
     
-    // MARK: Setup
-    
-    private func setupScene() {
+    private func prepareLayout() {
+        setupUndoButtonLayout()
+        setupClearButtonLayout()
+        setupCenterDotViewLayout()
+        setupAddButtonLayout()
+    }
+        
+    private func linkInteractors() {
+        undoButton.addTarget(
+            self,
+            action: #selector(notifyDelegateUndoButtonDidTap),
+            for: .touchUpInside
+        )
+        clearButton.addTarget(
+            self,
+            action: #selector(notifyDelegateClearButtonDidTap),
+            for: .touchUpInside
+        )
+        addButton.addTarget(
+            self,
+            action: #selector(notifyDelegateAddButtonDidTap),
+            for: .touchUpInside
+        )
+    }
+}
+
+// MARK: - Appearance Setup
+
+extension MeasurementView {
+    private func customizeScene() {
         scene = SCNScene()
         showsStatistics = false // Shows fps and timing information
         autoenablesDefaultLighting = true
@@ -81,57 +96,66 @@ final class MeasurementView: ARSCNView {
         ]
     }
     
-    private func prepareLayout() {
-        setupUndoButtonLayout()
-        setupClearButtonLayout()
-        setupCenterDotViewLayout()
-        setupAddButtonLayout()
+    private func customizeUndoButton() {
+        undoButton.setImage(UIImage(named: "btn-bg-image-undo"), for: .normal)
+        undoButton.setTitleColor(.black, for: .normal)
     }
     
-    private func setListeners() {
+    private func customizeClearButton() {
+        clearButton.setTitleColor(.black, for: .normal)
+        clearButton.setBackgroundImage(UIImage(named: "btn-bg-image-clear"), for: .normal)
+        clearButton.contentEdgeInsets = UIEdgeInsets(
+            top: 5,
+            left: 5,
+            bottom: 5,
+            right: 5
+        )
     }
+    
+    private func customizeAddButton() {
+        addButton.setBackgroundImage(UIImage(named: "btn-bg-image-add"), for: .normal)
+    }
+}
 
-    // MARK: - Layout Setup
-        
+// MARK: - Layout Setup
+
+extension MeasurementView {
     private func setupUndoButtonLayout() {
         addSubview(undoButton)
-        
-//        undoButton.snp.makeConstraints { make in
-//            make.centerY.equalTo(closeButton)
-//            make.left.equalTo(closeButton.snp.right).offset(layout.current.defaultHorizontalInset)
-//            make.size.equalTo(layout.current.defaultButtonSize)
-//        }
+                
+        undoButton.addConstraints([
+            equal(self, \.safeAreaLayoutGuide.topAnchor, constant: layout.defaultInset),
+            equal(self, \.leadingAnchor, constant: layout.defaultInset)
+        ])
     }
     
     private func setupClearButtonLayout() {
         addSubview(clearButton)
         
-//        clearButton.snp.makeConstraints { make in
-//            make.centerY.equalTo(undoButton)
-//            make.right.equalToSuperview().inset(layout.current.defaultHorizontalInset)
-//            make.size.equalTo(layout.current.defaultButtonSize)
-//        }
+        clearButton.addConstraints([
+            equal(self, \.safeAreaLayoutGuide.topAnchor, constant: layout.defaultInset),
+            equal(self, \.trailingAnchor, constant: -layout.defaultInset)
+        ])
     }
-        
+    
     private func setupCenterDotViewLayout() {
         addSubview(centerDotView)
         
-//        centerDotView.snp.makeConstraints { make in
-//            make.center.equalToSuperview()
-//        }
+        centerDotView.addConstraints([
+            equal(self, \.centerXAnchor),
+            equal(self, \.centerYAnchor)
+        ])
     }
-        
+    
     private func setupAddButtonLayout() {
         addSubview(addButton)
         
-//        addButton.snp.makeConstraints { make in
-//            make.centerX.equalToSuperview()
-//            make.bottom
-//                .equalTo(safeAreaLayoutGuide.snp.bottom)
-//                .inset(layout.current.addButtonBottomInset)
-//        }
+        addButton.addConstraints([
+            equal(self, \.centerXAnchor),
+            equal(self, \.safeAreaLayoutGuide.bottomAnchor, constant: -(2 * layout.defaultInset))
+        ])
     }
-        
+    
     private func addIndicatorNode() {
         let geometry = SCNPlane(width: 0.05, height: 0.05)
         let material = SCNMaterial()
@@ -146,9 +170,12 @@ final class MeasurementView: ARSCNView {
     private func removeIndicatorNode() {
         indicatorNode.removeFromParentNode()
     }
-            
-    // MARK: - Actions
-    
+}
+
+// MARK: - Actions
+
+extension MeasurementView {
+
     @objc
     private func notifyDelegateCloseButtonDidTap() {
         guard let delegate = delegate as? MeasureViewDelegate else {
@@ -240,16 +267,6 @@ extension MeasurementView {
 
 extension MeasurementView {
     private struct LayoutConstants {
-        let closeButtonLeftInset: CGFloat = 5.0
-        let stepInfoLabelTopOffset: CGFloat = 20.0
-        let closeButtonSize = CGSize(width: 42.0, height: 42.0)
-        let undoButtonLeftOffset: CGFloat = 5.0
-        let addButtonBottomInset: CGFloat = 20.0
-        let tipViewHorizontalInset: CGFloat = 30.0
-        let tipViewTopInset: CGFloat = 25.0
-        let contentBottomInset: CGFloat = 10.0
-        let defaultHorizontalInset: CGFloat = 15.0
-        let defaultVerticalInset: CGFloat = 15.0
-        let defaultButtonSize = CGSize(width: 72.9, height: 42.0)
+        let defaultInset: CGFloat = 16.0
     }
 }
