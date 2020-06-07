@@ -6,14 +6,12 @@
 //  Copyright © 2020 Hippo Foundry. All rights reserved.
 //
 
-import Foundation
 import ARKit
 
 protocol MeasureViewDelegate: ARSCNViewDelegate {
-    func measurementViewDidTapCloseButton(_ view: MeasurementView)
-    func measurementViewDidTapUndoButton(_ view: MeasurementView)
-    func measurementViewDidTapClearButton(_ view: MeasurementView)
-    func measurementViewDidTapAddButton(_ view: MeasurementView)
+    func measurementViewDidTapUndo(_ view: MeasurementView)
+    func measurementViewDidTapClear(_ view: MeasurementView)
+    func measurementViewDidTapAdd(_ view: MeasurementView)
 }
 
 final class MeasurementView: ARSCNView {
@@ -92,7 +90,7 @@ extension MeasurementView {
         autoenablesDefaultLighting = true
         debugOptions = [
             ARSCNDebugOptions.showFeaturePoints,
-            ARSCNDebugOptions.showWorldOrigin
+//            ARSCNDebugOptions.showWorldOrigin
         ]
     }
     
@@ -104,12 +102,7 @@ extension MeasurementView {
     private func customizeClearButton() {
         clearButton.setTitleColor(.black, for: .normal)
         clearButton.setBackgroundImage(UIImage(named: "btn-bg-image-clear"), for: .normal)
-        clearButton.contentEdgeInsets = UIEdgeInsets(
-            top: 5,
-            left: 5,
-            bottom: 5,
-            right: 5
-        )
+        clearButton.contentEdgeInsets = layout.clearButtonContentEdgeInsets
     }
     
     private func customizeAddButton() {
@@ -175,23 +168,13 @@ extension MeasurementView {
 // MARK: - Actions
 
 extension MeasurementView {
-
-    @objc
-    private func notifyDelegateCloseButtonDidTap() {
-        guard let delegate = delegate as? MeasureViewDelegate else {
-            return
-        }
-        
-        delegate.measurementViewDidTapCloseButton(self)
-    }
-    
     @objc
     private func notifyDelegateUndoButtonDidTap() {
         guard let delegate = delegate as? MeasureViewDelegate else {
             return
         }
         
-        delegate.measurementViewDidTapUndoButton(self)
+        delegate.measurementViewDidTapUndo(self)
     }
     
     @objc
@@ -200,7 +183,7 @@ extension MeasurementView {
             return
         }
         
-        delegate.measurementViewDidTapClearButton(self)
+        delegate.measurementViewDidTapClear(self)
     }
     
     @objc
@@ -209,11 +192,20 @@ extension MeasurementView {
             return
         }
 
-        delegate.measurementViewDidTapAddButton(self)
+        delegate.measurementViewDidTapAdd(self)
     }
 }
 
-// MARK: API - Session
+// MARK: - Constants
+
+extension MeasurementView {
+    private struct LayoutConstants {
+        let defaultInset: CGFloat = 16.0
+        let clearButtonContentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    }
+}
+
+// MARK: Public
 
 extension MeasurementView {
     func runSession() {
@@ -230,17 +222,11 @@ extension MeasurementView {
     }
 }
 
-// MARK: API - Node addition
-
 extension MeasurementView {
     func addChildNode(_ node: SCNNode) {
         scene.rootNode.addChildNode(node)
     }
-}
-
-// MARK: Public
-
-extension MeasurementView {
+    
     func updateIndicatorPosition(with alignment: ARPlaneAnchor.Alignment) {
         DispatchQueue.main.async {
             if self.indicatorNode.parent == nil {
@@ -260,13 +246,5 @@ extension MeasurementView {
             
             self.indicatorNode.position = centerRealWorldPosition
         }
-    }
-}
-
-// MARK: - Constants
-
-extension MeasurementView {
-    private struct LayoutConstants {
-        let defaultInset: CGFloat = 16.0
     }
 }
