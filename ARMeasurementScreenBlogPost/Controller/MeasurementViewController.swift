@@ -14,14 +14,13 @@ class MeasurementViewController: UIViewController {
     
     // MARK: - Properties
     
-    private(set) var draft = MeasurementDraft()
-    private var planes = [ARPlaneAnchor: PlaneNode]()
+    private var draft = MeasurementDraft()
+    var planes = [ARPlaneAnchor: PlaneNode]()
     private var isMeasuring = false
-    private let isDebuggingEnabled = false
     
     // MARK: - Subviews
 
-    private lazy var measurementView = MeasurementView()
+    private(set) lazy var measurementView = MeasurementView()
         
     // MARK: - View lifecycle
     
@@ -120,7 +119,7 @@ class MeasurementViewController: UIViewController {
 // MARK: - Distance calculation
 
 extension MeasurementViewController {
-    fileprivate func calculateCurrentDistance() -> Double? {
+    private func calculateCurrentDistance() -> Double? {
         let fromDotNode = draft.startDotNode
 
         guard
@@ -304,32 +303,19 @@ extension MeasurementViewController: MeasureViewDelegate {
     }
 }
 
-// MARK: - Plane/Anchor updates
+// MARK: - Info
 
 extension MeasurementViewController {
-    func addPlaneFor(_ node: SCNNode, _ anchor: ARAnchor) {
-        if !isDebuggingEnabled {
-            return
-        }
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {
-            return
-        }
-
-        let plane = PlaneNode(anchor: planeAnchor, in: measurementView)
-        node.addChildNode(plane)
-        self.planes[planeAnchor] = plane
-    }
-    
     private func updateSessionInfoLabel(for frame: ARFrame, trackingState: ARCamera.TrackingState) {
         // Update the UI to provide feedback on the state of the AR experience.
         let message: String
         
         switch trackingState {
         case .normal where frame.anchors.isEmpty, // No planes detected
-             .limited(.excessiveMotion),
-             .limited(.initializing),
-             .limited(.insufficientFeatures),
-             .notAvailable:
+        .limited(.excessiveMotion),
+        .limited(.initializing),
+        .limited(.insufficientFeatures),
+        .notAvailable:
             message = "Move your phone on a flat surface until it's detected"
             
         default:
@@ -337,54 +323,12 @@ extension MeasurementViewController {
             // (Nor when in unreachable limited-tracking states.)
             message = ""
         }
-
+        
         print(message)
-//        measurementView.sessionInfo = message.attributed(textAttributes)
-    }
-    
-    private func updatePlaneFor(_ node: SCNNode, _ anchor: ARAnchor) {
-        if !isDebuggingEnabled {
-            return
-        }
-        guard
-            let planeAnchor = anchor as? ARPlaneAnchor,
-            let plane = node.childNodes.first as? PlaneNode
-            else {
-                return
-        }
-        
-        // Update ARSCNPlaneGeometry to the anchor's new estimated shape.
-        if let planeGeometry = plane.meshNode.geometry as? ARSCNPlaneGeometry {
-            planeGeometry.update(from: planeAnchor.geometry)
-        }
-
-        // Update extent visualization to the anchor's new bounding rectangle.
-        if let extentGeometry = plane.extentNode.geometry as? SCNPlane {
-            extentGeometry.width = CGFloat(planeAnchor.extent.x)
-            extentGeometry.height = CGFloat(planeAnchor.extent.z)
-            plane.extentNode.simdPosition = planeAnchor.center
-        }
-    }
-    
-    private func removePlane(for anchor: ARAnchor) {
-        if !isDebuggingEnabled {
-            return
-        }
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {
-            return
-        }
-
-        planes.removeValue(forKey: planeAnchor)
-    }
-    
-    private func updateIndicatorPosition(for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {
-            return
-        }
-        
-        self.measurementView.updateIndicatorPosition(with: planeAnchor.alignment)
+        //        measurementView.sessionInfo = message.attributed(textAttributes)
     }
 }
+
 
 extension simd_float4x4 {
     func toSCNVector3() -> SCNVector3 {
