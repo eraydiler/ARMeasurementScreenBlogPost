@@ -13,9 +13,9 @@ import ARKit
 class MeasurementViewController: UIViewController {
     
     // MARK: - Properties
-    
-    private var draft = MeasurementDraft()
+
     var planes = [ARPlaneAnchor: PlaneNode]()
+    private var draft = MeasurementDraft()
     private var isMeasuring = false
     
     // MARK: - Subviews
@@ -164,29 +164,28 @@ extension MeasurementViewController {
                 return
         }
         
-        let line = Line(
-            fromVector: fromPosition,
-            toVector: toPosition,
-            pointOfView: measurementView.pointOfView
-        )
-
         switch draft.measurement.currentStep {
-        case .first:
-            return
+        case .first, .last:
+            break
         case .second:
+            let line = Line(
+                fromVector: fromPosition,
+                toVector: toPosition,
+                pointOfView: measurementView.pointOfView
+            )
+
             for node in draft.lines[0].nodes {
                 node.removeFromParentNode()
             }
 
             draft.lines[0].removeFromParentNode()
             draft.lines[0] = line
-        default:
-            break
+
+            for node in line.nodes {
+                measurementView.addChildNode(node)
+            }
         }
 
-        for aNode in line.nodes {
-            measurementView.addChildNode(aNode)
-        }
     }
 }
 
