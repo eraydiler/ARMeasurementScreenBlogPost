@@ -15,7 +15,7 @@ class MeasurementViewController: UIViewController {
     // MARK: - Properties
 
     var planes = [ARPlaneAnchor: PlaneNode]()
-    private var draft = MeasurementDraft()
+    private var draft = ARMeasurementDraft()
     private var isMeasuring = false
     
     // MARK: - Subviews
@@ -93,26 +93,7 @@ class MeasurementViewController: UIViewController {
             return
         }
         
-        guard let distance = calculateCurrentDistance() else {
-            return
-        }
-        
-        let distanceText: String
-//        if draft.unitSystem == .metric {
-            distanceText = String(format: "%.1f cm", distance)
-//        } else {
-//            distanceText = String(format: "%.1f\"", distance)
-//        }
-        
-        switch draft.measurement.currentStep {
-        case .first:
-            break
-        case .second:
-            draft.distances[0] = distance
-            draft.lines[0].textString = distanceText
-        case .last:
-            break
-        }
+        draft.setDistance(calculateCurrentDistance())
     }
 }
 
@@ -194,12 +175,10 @@ extension MeasurementViewController {
 extension MeasurementViewController {
     private func goNextStep(fromStarting dotNode: DotNode) {
         draft.goNextStep(fromStarting: dotNode)
-//        updateStepInfoLabelText()
     }
     
     private func goPreviousStep() {
         draft.goPreviousStep()
-//        updateStepInfoLabelText()
     }
 }
 
@@ -325,16 +304,5 @@ extension MeasurementViewController {
         
         print(message)
         //        measurementView.sessionInfo = message.attributed(textAttributes)
-    }
-}
-
-
-extension simd_float4x4 {
-    func toSCNVector3() -> SCNVector3 {
-        return SCNVector3(
-            self.columns.3.x,
-            self.columns.3.y,
-            self.columns.3.z
-        )
     }
 }

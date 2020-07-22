@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F95EBA3824C8802F0022AA6E /* simd_float4x4+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3724C8802F0022AA6E /* simd_float4x4+Addition.swift */; };
+		F95EBA3A24C885480022AA6E /* Array+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3924C885480022AA6E /* Array+Additions.swift */; };
+		F95EBA3C24C8855F0022AA6E /* ARMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3B24C8855F0022AA6E /* ARMeasurement.swift */; };
+		F95EBA3E24C889700022AA6E /* ARMeasurementFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3D24C889700022AA6E /* ARMeasurementFormatter.swift */; };
 		F96AC3AC2481AE4F00D843D0 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96AC3AB2481AE4F00D843D0 /* UIView+Constraints.swift */; };
 		F9720BEB247B08E10070C4DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9720BEA247B08E10070C4DF /* AppDelegate.swift */; };
 		F9720BED247B08E10070C4DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9720BEC247B08E10070C4DF /* SceneDelegate.swift */; };
 		F9720BEF247B08E10070C4DF /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9720BEE247B08E10070C4DF /* MeasurementViewController.swift */; };
 		F9720BF4247B08E20070C4DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9720BF3247B08E20070C4DF /* Assets.xcassets */; };
 		F9720BF7247B08E20070C4DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9720BF5247B08E20070C4DF /* LaunchScreen.storyboard */; };
-		F9B1AE57248DAC1B00BCD4D6 /* MeasurementDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1AE56248DAC1B00BCD4D6 /* MeasurementDraft.swift */; };
+		F9B1AE57248DAC1B00BCD4D6 /* ARMeasurementDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1AE56248DAC1B00BCD4D6 /* ARMeasurementDraft.swift */; };
 		F9B1AE59248DAC7000BCD4D6 /* DotNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1AE58248DAC7000BCD4D6 /* DotNode.swift */; };
 		F9B1AE5B248DACAF00BCD4D6 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1AE5A248DACAF00BCD4D6 /* Line.swift */; };
 		F9B1AE5D248DACD200BCD4D6 /* CylinderLineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1AE5C248DACD200BCD4D6 /* CylinderLineNode.swift */; };
@@ -25,6 +29,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F95EBA3724C8802F0022AA6E /* simd_float4x4+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_float4x4+Addition.swift"; sourceTree = "<group>"; };
+		F95EBA3924C885480022AA6E /* Array+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Additions.swift"; sourceTree = "<group>"; };
+		F95EBA3B24C8855F0022AA6E /* ARMeasurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasurement.swift; sourceTree = "<group>"; };
+		F95EBA3D24C889700022AA6E /* ARMeasurementFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasurementFormatter.swift; sourceTree = "<group>"; };
 		F96AC3AB2481AE4F00D843D0 /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		F9720BE7247B08E10070C4DF /* ARMeasurementScreenBlogPost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMeasurementScreenBlogPost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9720BEA247B08E10070C4DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -33,7 +41,7 @@
 		F9720BF3247B08E20070C4DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9720BF6247B08E20070C4DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F9720BF8247B08E20070C4DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F9B1AE56248DAC1B00BCD4D6 /* MeasurementDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementDraft.swift; sourceTree = "<group>"; };
+		F9B1AE56248DAC1B00BCD4D6 /* ARMeasurementDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasurementDraft.swift; sourceTree = "<group>"; };
 		F9B1AE58248DAC7000BCD4D6 /* DotNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotNode.swift; sourceTree = "<group>"; };
 		F9B1AE5A248DACAF00BCD4D6 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		F9B1AE5C248DACD200BCD4D6 /* CylinderLineNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CylinderLineNode.swift; sourceTree = "<group>"; };
@@ -98,7 +106,9 @@
 		F9B1AE5E248DB49400BCD4D6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F9B1AE56248DAC1B00BCD4D6 /* MeasurementDraft.swift */,
+				F9B1AE56248DAC1B00BCD4D6 /* ARMeasurementDraft.swift */,
+				F95EBA3D24C889700022AA6E /* ARMeasurementFormatter.swift */,
+				F95EBA3B24C8855F0022AA6E /* ARMeasurement.swift */,
 				F9B1AE5C248DACD200BCD4D6 /* CylinderLineNode.swift */,
 				F9B1AE62248DB98300BCD4D6 /* PlaneNode.swift */,
 				F9B1AE58248DAC7000BCD4D6 /* DotNode.swift */,
@@ -137,7 +147,9 @@
 			isa = PBXGroup;
 			children = (
 				F9B7D1D3248191E900DDD48F /* ARSceneView+Additions.swift */,
+				F95EBA3724C8802F0022AA6E /* simd_float4x4+Addition.swift */,
 				F96AC3AB2481AE4F00D843D0 /* UIView+Constraints.swift */,
+				F95EBA3924C885480022AA6E /* Array+Additions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -213,15 +225,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9B1AE57248DAC1B00BCD4D6 /* MeasurementDraft.swift in Sources */,
+				F9B1AE57248DAC1B00BCD4D6 /* ARMeasurementDraft.swift in Sources */,
 				F9720BEF247B08E10070C4DF /* MeasurementViewController.swift in Sources */,
 				F9B1AE68248DBADE00BCD4D6 /* MeasurementViewController+VisualDebugging.swift in Sources */,
+				F95EBA3A24C885480022AA6E /* Array+Additions.swift in Sources */,
+				F95EBA3E24C889700022AA6E /* ARMeasurementFormatter.swift in Sources */,
 				F9B7D1D22481919E00DDD48F /* MeasurementView.swift in Sources */,
 				F9B7D1D4248191E900DDD48F /* ARSceneView+Additions.swift in Sources */,
 				F96AC3AC2481AE4F00D843D0 /* UIView+Constraints.swift in Sources */,
 				F9720BEB247B08E10070C4DF /* AppDelegate.swift in Sources */,
 				F9B1AE63248DB98300BCD4D6 /* PlaneNode.swift in Sources */,
 				F9B1AE59248DAC7000BCD4D6 /* DotNode.swift in Sources */,
+				F95EBA3C24C8855F0022AA6E /* ARMeasurement.swift in Sources */,
+				F95EBA3824C8802F0022AA6E /* simd_float4x4+Addition.swift in Sources */,
 				F9720BED247B08E10070C4DF /* SceneDelegate.swift in Sources */,
 				F9B1AE5D248DACD200BCD4D6 /* CylinderLineNode.swift in Sources */,
 				F9B1AE5B248DACAF00BCD4D6 /* Line.swift in Sources */,
@@ -371,7 +387,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hippo.ARMeasurementScreenBlogPost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -390,7 +406,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hippo.ARMeasurementScreenBlogPost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -8,65 +8,15 @@
 
 import SceneKit
 
-extension Array {
-    public subscript(safeIndex index: Int) -> Element? {
-        guard index >= 0, index < endIndex else {
-            return nil
-        }
-
-        return self[index]
-    }
-}
-
-struct Measurement {
-    let steps: [Step] = [.first, .second, .last]
-    var currentStep: Step = .first
-}
-
-extension Measurement {
-    var isCompleted: Bool {
-        return currentStep == steps.last
-    }
-
-    mutating func goNextStep() {
-        guard
-            let index = steps.firstIndex(of: currentStep),
-            let nextStep = steps[safeIndex: index + 1]
-            else {
-                return
-        }
-
-        currentStep = nextStep
-    }
-    
-    mutating func goPreviousStep() {
-        guard
-            let index = steps.firstIndex(of: currentStep),
-            let previousStep = steps[safeIndex: index - 1]
-            else {
-                return
-        }
-
-        currentStep = previousStep
-    }
-}
-
-extension Measurement {
-    enum Step {
-        case first, second, last
-    }
-}
-
-class MeasurementDraft {
+class ARMeasurementDraft {
     
     // MARK: - Properties
 
     var startDotNode: DotNode?
     var endDotNode: DotNode?
     var lines = [Line()]
-    var distances = [Double()]
     
-    private(set) var measurement = Measurement()
+    private(set) var measurement = ARMeasurement()
 
     // MARK: - Computed properties
     
@@ -93,7 +43,7 @@ class MeasurementDraft {
 
 // MARK: - Public
 
-extension MeasurementDraft {
+extension ARMeasurementDraft {
 //    var info: String {
 //        return measurement.info(forLength: distances.first)
 //    }
@@ -103,11 +53,7 @@ extension MeasurementDraft {
         startDotNode = nil
         endDotNode = nil
         lines = [Line(), Line()]
-        distances = [Double(), Double()]
         measurement.currentStep = .first
-    }
-
-    func clearNodes() {
     }
 
     func goNextStep(fromStarting dotNode: DotNode) {
@@ -134,9 +80,6 @@ extension MeasurementDraft {
                 lines[0].removeFromParentNode()
                 lines[0] = Line()
             }
-            if !distances.isEmpty {
-                distances[0] = Double()
-            }
         case .last:
             endDotNode?.removeFromParentNode()
             endDotNode = nil
@@ -144,11 +87,29 @@ extension MeasurementDraft {
                 lines[0].removeFromParentNode()
                 lines[0] = Line()
             }
-            if !distances.isEmpty {
-                distances[0] = Double()
-            }
         }
 
         measurement.goPreviousStep()
+    }
+    
+    func setDistance(_ distance: Double?) {
+        guard let distance = distance else { return }
+        
+        var measurement = Measurement(value: distance, unit: UnitLength.centimeters)
+        
+        if !Locale.current.usesMetricSystem {
+            measurement = measurement.converted(to: UnitLength.inches)
+        }
+        
+        let distanceText = ARMeasurementFormatter().string(from: measurement)
+        
+        switch self.measurement.currentStep {
+        case .first:
+            break
+        case .second:
+            lines[0].textString = distanceText
+        case .last:
+            break
+        }
     }
 }

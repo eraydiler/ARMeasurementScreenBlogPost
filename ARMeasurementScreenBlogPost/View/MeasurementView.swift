@@ -81,7 +81,7 @@ extension MeasurementView {
     }
 }
 
-// MARK: - Appearance Setup
+// MARK: - Appearance
 
 extension MeasurementView {
     private func customizeScene() {
@@ -89,7 +89,7 @@ extension MeasurementView {
         showsStatistics = false // Shows fps and timing information
         autoenablesDefaultLighting = true
         debugOptions = [
-            ARSCNDebugOptions.showFeaturePoints,
+//            ARSCNDebugOptions.showFeaturePoints,
 //            ARSCNDebugOptions.showWorldOrigin
         ]
     }
@@ -110,7 +110,7 @@ extension MeasurementView {
     }
 }
 
-// MARK: - Layout Setup
+// MARK: - Layout
 
 extension MeasurementView {
     private func setupUndoButtonLayout() {
