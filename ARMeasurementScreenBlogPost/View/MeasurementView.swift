@@ -8,7 +8,7 @@
 
 import ARKit
 
-protocol MeasureViewDelegate: ARSCNViewDelegate {
+protocol MeasurementViewDelegate: ARSCNViewDelegate {
     func measurementViewDidTapUndo(_ view: MeasurementView)
     func measurementViewDidTapClear(_ view: MeasurementView)
     func measurementViewDidTapAdd(_ view: MeasurementView)
@@ -27,6 +27,7 @@ final class MeasurementView: ARSCNView {
     private lazy var indicatorNode = SCNNode()
     private lazy var centerDotView = UIImageView(image: UIImage(named: "icon-dot"))
     private lazy var addButton = UIButton()
+    private lazy var infoLabel = UILabel()
     
     // MARK: - Initialization
     
@@ -52,6 +53,7 @@ extension MeasurementView {
         customizeScene()
         customizeUndoButton()
         customizeClearButton()
+        customizeCenterDotView()
         customizeAddButton()
     }
     
@@ -60,6 +62,8 @@ extension MeasurementView {
         setupClearButtonLayout()
         setupCenterDotViewLayout()
         setupAddButtonLayout()
+        setupInfoLabelLayout()
+        customizeInfoLabel()
     }
         
     private func linkInteractors() {
@@ -105,8 +109,18 @@ extension MeasurementView {
         clearButton.contentEdgeInsets = layout.clearButtonContentEdgeInsets
     }
     
+    private func customizeCenterDotView() {
+        centerDotView.alpha = 0
+    }
+
     private func customizeAddButton() {
         addButton.setBackgroundImage(UIImage(named: "btn-bg-image-add"), for: .normal)
+        addButton.isEnabled = false
+    }
+    
+    private func customizeInfoLabel() {
+        infoLabel.numberOfLines = 0
+        infoLabel.textAlignment = .center
     }
 }
 
@@ -149,6 +163,16 @@ extension MeasurementView {
         ])
     }
     
+    private func setupInfoLabelLayout() {
+        addSubview(infoLabel)
+        
+        infoLabel.addConstraints([
+            equal(self, \.centerYAnchor),
+            equal(self, \.leadingAnchor, constant: layout.defaultInset),
+            equal(self, \.trailingAnchor, constant: -layout.defaultInset)
+        ])
+    }
+    
     private func addIndicatorNode() {
         let geometry = SCNPlane(width: 0.05, height: 0.05)
         let material = SCNMaterial()
@@ -170,7 +194,7 @@ extension MeasurementView {
 extension MeasurementView {
     @objc
     private func notifyDelegateUndoButtonDidTap() {
-        guard let delegate = delegate as? MeasureViewDelegate else {
+        guard let delegate = delegate as? MeasurementViewDelegate else {
             return
         }
         
@@ -179,7 +203,7 @@ extension MeasurementView {
     
     @objc
     private func notifyDelegateClearButtonDidTap() {
-        guard let delegate = delegate as? MeasureViewDelegate else {
+        guard let delegate = delegate as? MeasurementViewDelegate else {
             return
         }
         
@@ -188,7 +212,7 @@ extension MeasurementView {
     
     @objc
     private func notifyDelegateAddButtonDidTap() {
-        guard let delegate = delegate as? MeasureViewDelegate else {
+        guard let delegate = delegate as? MeasurementViewDelegate else {
             return
         }
 
@@ -231,7 +255,7 @@ extension MeasurementView {
         nodes.forEach { scene.rootNode.addChildNode($0) }
     }
     
-    func updateIndicatorPosition() {
+    func resetIndicatorPosition() {
         DispatchQueue.main.async {
             if self.indicatorNode.parent == nil {
                self.addIndicatorNode()
@@ -244,6 +268,29 @@ extension MeasurementView {
             
             self.indicatorNode.eulerAngles.x = -.pi / 2
             self.indicatorNode.position = centerRealWorldPosition
+        }
+    }
+}
+
+extension MeasurementView {
+    var info: String? {
+        get {
+            infoLabel.text
+        }
+        set {
+            infoLabel.text = newValue
+            
+            if let value = newValue {
+                setInfoLabel(visible: !value.isEmpty)
+            }
+        }
+    }
+    
+    private func setInfoLabel(visible: Bool) {
+        UIView.animate(withDuration: 0.3) {
+            self.infoLabel.alpha = visible ? 1 : 0
+            self.centerDotView.alpha = visible ? 0 : 1
+            self.addButton.isEnabled = !visible
         }
     }
 }

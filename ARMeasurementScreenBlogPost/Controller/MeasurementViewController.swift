@@ -182,7 +182,7 @@ extension MeasurementViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         DispatchQueue.main.async {
-            self.measurementView.updateIndicatorPosition()
+            self.measurementView.resetIndicatorPosition()
             self.updatePlaneFor(node, anchor)
         }
     }
@@ -207,7 +207,7 @@ extension MeasurementViewController: ARSCNViewDelegate {
 
 // MARK: - ARMeasureViewDelegate
 
-extension MeasurementViewController: MeasureViewDelegate {
+extension MeasurementViewController: MeasurementViewDelegate {
     func measurementViewDidTapUndo(_ view: MeasurementView) {
         goPreviousStep()
     }

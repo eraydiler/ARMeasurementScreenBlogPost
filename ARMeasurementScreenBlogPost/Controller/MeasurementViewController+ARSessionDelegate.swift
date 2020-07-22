@@ -61,7 +61,6 @@ extension MeasurementViewController {
             message = ""
         }
         
-        print(message)
-        //        measurementView.sessionInfo = message.attributed(textAttributes)
+        measurementView.info = message
     }
 }
