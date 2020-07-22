@@ -14,7 +14,7 @@ class ARMeasurementDraft {
 
     var startDotNode: DotNode?
     var endDotNode: DotNode?
-    var lines = [Line()]
+    var line: Line?
     
     private(set) var measurement = ARMeasurement()
 
@@ -27,10 +27,8 @@ class ARMeasurementDraft {
             nodes.append(startDotNode)
         }
         
-        if !lines.isEmpty {
-            for aLine in lines {
-                nodes.append(contentsOf: aLine.nodes)
-            }
+        if let line = line {
+            nodes.append(contentsOf: line.nodes)
         }
         
         if let endDotNode = endDotNode {
@@ -52,7 +50,7 @@ extension ARMeasurementDraft {
         allNodes.forEach { $0.removeFromParentNode() }
         startDotNode = nil
         endDotNode = nil
-        lines = [Line(), Line()]
+        line = nil
         measurement.currentStep = .first
     }
 
@@ -76,17 +74,13 @@ extension ARMeasurementDraft {
         case .second:
             startDotNode?.removeFromParentNode()
             startDotNode = nil
-            if !lines.isEmpty {
-                lines[0].removeFromParentNode()
-                lines[0] = Line()
-            }
+            line?.removeFromParentNode()
+            line = nil
         case .last:
             endDotNode?.removeFromParentNode()
             endDotNode = nil
-            if !lines.isEmpty {
-                lines[0].removeFromParentNode()
-                lines[0] = Line()
-            }
+            line?.removeFromParentNode()
+            line = nil
         }
 
         measurement.goPreviousStep()
@@ -95,9 +89,11 @@ extension ARMeasurementDraft {
     func setDistance(_ distance: Double?) {
         guard let distance = distance else { return }
         
-        var measurement = Measurement(value: distance, unit: UnitLength.centimeters)
+        var measurement = Measurement(value: distance, unit: UnitLength.meters)
         
-        if !Locale.current.usesMetricSystem {
+        if Locale.current.usesMetricSystem {
+            measurement = measurement.converted(to: UnitLength.centimeters)
+        } else {
             measurement = measurement.converted(to: UnitLength.inches)
         }
         
@@ -107,7 +103,7 @@ extension ARMeasurementDraft {
         case .first:
             break
         case .second:
-            lines[0].textString = distanceText
+            line?.textString = distanceText
         case .last:
             break
         }
@@ -132,9 +128,9 @@ extension ARMeasurementDraft {
             pointOfView: pointOfView
         )
         
-        lines[0].nodes.forEach { $0.removeFromParentNode() }
-        lines[0].removeFromParentNode()
-        lines[0] = line
+        self.line?.nodes.forEach { $0.removeFromParentNode() }
+        self.line?.removeFromParentNode()
+        self.line = line
         
         return line
     }

@@ -95,6 +95,15 @@ class MeasurementViewController: UIViewController {
         
         draft.setDistance(calculateCurrentDistance())
     }
+    
+    
+    private func updateIndicatorPosition(for anchor: ARAnchor) {
+        guard let planeAnchor = anchor as? ARPlaneAnchor else {
+            return
+        }
+        
+        self.measurementView.updateIndicatorPosition(with: planeAnchor.alignment)
+    }
 }
 
 // MARK: - Distance calculation
@@ -114,17 +123,14 @@ extension MeasurementViewController {
     }
     
     private func calculateDistance(from fromVector: SCNVector3, to toVector: SCNVector3) -> Double {
-        
         // ARKit is using meter for length/width/height
         let distanceInMeters = sqrt(
             (fromVector.x - toVector.x) * (fromVector.x - toVector.x)
                 + (fromVector.y - toVector.y) * (fromVector.y - toVector.y)
                 + (fromVector.z - toVector.z) * (fromVector.z - toVector.z)
         )
-        
-        let centimeterConvertionRatio: Float = 100.0
-        
-        return Double(distanceInMeters * centimeterConvertionRatio) // in metric
+                
+        return Double(distanceInMeters)
     }
 }
 

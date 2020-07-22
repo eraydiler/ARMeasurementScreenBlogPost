@@ -59,12 +59,4 @@ extension MeasurementViewController {
         
         planes.removeValue(forKey: planeAnchor)
     }
-    
-    func updateIndicatorPosition(for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {
-            return
-        }
-        
-        self.measurementView.updateIndicatorPosition(with: planeAnchor.alignment)
-    }
 }
