@@ -211,7 +211,7 @@ extension MeasurementView {
     func runSession() {
         let configuration = ARWorldTrackingConfiguration()
         
-        configuration.planeDetection = [ .horizontal /*, .vertical */]
+        configuration.planeDetection = [ .horizontal ]
         configuration.isLightEstimationEnabled = true
         
         session.run(configuration)
@@ -231,7 +231,7 @@ extension MeasurementView {
         nodes.forEach { scene.rootNode.addChildNode($0) }
     }
     
-    func updateIndicatorPosition(with alignment: ARPlaneAnchor.Alignment) {
+    func updateIndicatorPosition() {
         DispatchQueue.main.async {
             if self.indicatorNode.parent == nil {
                self.addIndicatorNode()
@@ -242,12 +242,7 @@ extension MeasurementView {
                 return
             }
             
-            if alignment == .horizontal {
-                self.indicatorNode.eulerAngles.x = -.pi / 2
-            } else {
-                self.indicatorNode.eulerAngles.x = 0
-            }
-            
+            self.indicatorNode.eulerAngles.x = -.pi / 2
             self.indicatorNode.position = centerRealWorldPosition
         }
     }

@@ -95,15 +95,6 @@ class MeasurementViewController: UIViewController {
         
         draft.setDistance(calculateCurrentDistance())
     }
-    
-    
-    private func updateIndicatorPosition(for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {
-            return
-        }
-        
-        self.measurementView.updateIndicatorPosition(with: planeAnchor.alignment)
-    }
 }
 
 // MARK: - Distance calculation
@@ -191,7 +182,7 @@ extension MeasurementViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         DispatchQueue.main.async {
-            self.updateIndicatorPosition(for: anchor)
+            self.measurementView.updateIndicatorPosition()
             self.updatePlaneFor(node, anchor)
         }
     }
