@@ -112,4 +112,30 @@ extension ARMeasurementDraft {
             break
         }
     }
+    
+    func addLine(
+        to position: SCNVector3?,
+        withPointOfView pointOfView: SCNNode?
+    ) -> Line? {
+        guard
+            measurement.currentStep == .second,
+            let fromPosition = startDotNode?.position,
+            let toPosition = position,
+            let pointOfView = pointOfView
+            else {
+                return nil
+        }
+        
+        let line = Line(
+            fromVector: fromPosition,
+            toVector: toPosition,
+            pointOfView: pointOfView
+        )
+        
+        lines[0].nodes.forEach { $0.removeFromParentNode() }
+        lines[0].removeFromParentNode()
+        lines[0] = line
+        
+        return line
+    }
 }

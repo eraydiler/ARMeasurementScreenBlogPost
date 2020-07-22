@@ -227,6 +227,10 @@ extension MeasurementView {
         scene.rootNode.addChildNode(node)
     }
     
+    func addChildNodes(_ nodes: [SCNNode]) {
+        nodes.forEach { scene.rootNode.addChildNode($0) }
+    }
+    
     func updateIndicatorPosition(with alignment: ARPlaneAnchor.Alignment) {
         DispatchQueue.main.async {
             if self.indicatorNode.parent == nil {

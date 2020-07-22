@@ -11,6 +11,7 @@
 		F95EBA3A24C885480022AA6E /* Array+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3924C885480022AA6E /* Array+Additions.swift */; };
 		F95EBA3C24C8855F0022AA6E /* ARMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3B24C8855F0022AA6E /* ARMeasurement.swift */; };
 		F95EBA3E24C889700022AA6E /* ARMeasurementFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3D24C889700022AA6E /* ARMeasurementFormatter.swift */; };
+		F95EBA4024C88B760022AA6E /* MeasurementViewController+ARSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3F24C88B760022AA6E /* MeasurementViewController+ARSessionDelegate.swift */; };
 		F96AC3AC2481AE4F00D843D0 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96AC3AB2481AE4F00D843D0 /* UIView+Constraints.swift */; };
 		F9720BEB247B08E10070C4DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9720BEA247B08E10070C4DF /* AppDelegate.swift */; };
 		F9720BED247B08E10070C4DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9720BEC247B08E10070C4DF /* SceneDelegate.swift */; };
@@ -33,6 +34,7 @@
 		F95EBA3924C885480022AA6E /* Array+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Additions.swift"; sourceTree = "<group>"; };
 		F95EBA3B24C8855F0022AA6E /* ARMeasurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasurement.swift; sourceTree = "<group>"; };
 		F95EBA3D24C889700022AA6E /* ARMeasurementFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasurementFormatter.swift; sourceTree = "<group>"; };
+		F95EBA3F24C88B760022AA6E /* MeasurementViewController+ARSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MeasurementViewController+ARSessionDelegate.swift"; sourceTree = "<group>"; };
 		F96AC3AB2481AE4F00D843D0 /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		F9720BE7247B08E10070C4DF /* ARMeasurementScreenBlogPost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMeasurementScreenBlogPost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9720BEA247B08E10070C4DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				F9720BEE247B08E10070C4DF /* MeasurementViewController.swift */,
+				F95EBA3F24C88B760022AA6E /* MeasurementViewController+ARSessionDelegate.swift */,
 				F9B1AE67248DBADE00BCD4D6 /* MeasurementViewController+VisualDebugging.swift */,
 			);
 			path = Controller;
@@ -228,6 +231,7 @@
 				F9B1AE57248DAC1B00BCD4D6 /* ARMeasurementDraft.swift in Sources */,
 				F9720BEF247B08E10070C4DF /* MeasurementViewController.swift in Sources */,
 				F9B1AE68248DBADE00BCD4D6 /* MeasurementViewController+VisualDebugging.swift in Sources */,
+				F95EBA4024C88B760022AA6E /* MeasurementViewController+ARSessionDelegate.swift in Sources */,
 				F95EBA3A24C885480022AA6E /* Array+Additions.swift in Sources */,
 				F95EBA3E24C889700022AA6E /* ARMeasurementFormatter.swift in Sources */,
 				F9B7D1D22481919E00DDD48F /* MeasurementView.swift in Sources */,
