@@ -1,5 +1,5 @@
 //
-//  MeasurementViewController+ARSessionDelegate.swift
+//  ARMeasurementViewController+ARSessionDelegate.swift
 //  ARMeasurementScreenBlogPost
 //
 //  Created by Eray Diler on 22.07.2020.
@@ -10,7 +10,7 @@ import ARKit
 
 // MARK: - ARSessionDelegate
 
-extension MeasurementViewController: ARSessionDelegate {
+extension ARMeasurementViewController: ARSessionDelegate {
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
         guard let frame = session.currentFrame else {
             return
@@ -42,7 +42,7 @@ extension MeasurementViewController: ARSessionDelegate {
 
 // MARK: - Info
 
-extension MeasurementViewController {
+extension ARMeasurementViewController {
     private func updateSessionInfoLabel(for frame: ARFrame, trackingState: ARCamera.TrackingState) {
         // Update the UI to provide feedback on the state of the AR experience.
         let message: String

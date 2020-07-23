@@ -9,12 +9,12 @@
 import ARKit
 
 protocol MeasurementViewDelegate: ARSCNViewDelegate {
-    func measurementViewDidTapUndo(_ view: MeasurementView)
-    func measurementViewDidTapClear(_ view: MeasurementView)
-    func measurementViewDidTapAdd(_ view: MeasurementView)
+    func measurementViewDidTapUndo(_ view: ARMeasurementView)
+    func measurementViewDidTapClear(_ view: ARMeasurementView)
+    func measurementViewDidTapAdd(_ view: ARMeasurementView)
 }
 
-final class MeasurementView: ARSCNView {
+final class ARMeasurementView: ARSCNView {
         
     // MARK: - Properties
     
@@ -48,7 +48,7 @@ final class MeasurementView: ARSCNView {
 
 // MARK: Setup
 
-extension MeasurementView {
+extension ARMeasurementView {
     private func customizeAppearance() {
         customizeScene()
         customizeUndoButton()
@@ -87,7 +87,7 @@ extension MeasurementView {
 
 // MARK: - Appearance
 
-extension MeasurementView {
+extension ARMeasurementView {
     private func customizeScene() {
         scene = SCNScene()
         showsStatistics = false // Shows fps and timing information
@@ -126,7 +126,7 @@ extension MeasurementView {
 
 // MARK: - Layout
 
-extension MeasurementView {
+extension ARMeasurementView {
     private func setupUndoButtonLayout() {
         addSubview(undoButton)
                 
@@ -191,7 +191,7 @@ extension MeasurementView {
 
 // MARK: - Actions
 
-extension MeasurementView {
+extension ARMeasurementView {
     @objc
     private func notifyDelegateUndoButtonDidTap() {
         guard let delegate = delegate as? MeasurementViewDelegate else {
@@ -222,7 +222,7 @@ extension MeasurementView {
 
 // MARK: - Constants
 
-extension MeasurementView {
+extension ARMeasurementView {
     private struct LayoutConstants {
         let defaultInset: CGFloat = 16.0
         let clearButtonContentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
@@ -231,7 +231,7 @@ extension MeasurementView {
 
 // MARK: Public
 
-extension MeasurementView {
+extension ARMeasurementView {
     func runSession() {
         let configuration = ARWorldTrackingConfiguration()
         
@@ -246,7 +246,7 @@ extension MeasurementView {
     }
 }
 
-extension MeasurementView {
+extension ARMeasurementView {
     func addChildNode(_ node: SCNNode) {
         scene.rootNode.addChildNode(node)
     }
@@ -272,7 +272,7 @@ extension MeasurementView {
     }
 }
 
-extension MeasurementView {
+extension ARMeasurementView {
     var info: String? {
         get {
             infoLabel.text

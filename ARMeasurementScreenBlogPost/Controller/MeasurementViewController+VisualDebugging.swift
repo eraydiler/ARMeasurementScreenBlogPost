@@ -9,7 +9,7 @@
 import ARKit
 import SceneKit
 
-extension MeasurementViewController {
+extension ARMeasurementViewController {
     private var isDebuggingEnabled: Bool { false }
     
     func addPlaneFor(_ node: SCNNode, _ anchor: ARAnchor) {

@@ -1,5 +1,5 @@
 //
-//  MeasurementViewController.swift
+//  ARMeasurementViewController.swift
 //  ARMeasurementScreenBlogPost
 //
 //  Created by Eray Diler on 24.05.2020.
@@ -10,17 +10,16 @@ import UIKit
 import SceneKit
 import ARKit
 
-class MeasurementViewController: UIViewController {
+class ARMeasurementViewController: UIViewController {
     
     // MARK: - Properties
 
     var planes = [ARPlaneAnchor: PlaneNode]()
     private var draft = ARMeasurementDraft()
-    private var isMeasuring = false
     
     // MARK: - Subviews
 
-    private(set) lazy var measurementView = MeasurementView()
+    private(set) lazy var measurementView = ARMeasurementView()
         
     // MARK: - View lifecycle
     
@@ -69,11 +68,7 @@ class MeasurementViewController: UIViewController {
         guard let position = centerDotWorldPositionOnExistingPlanes() else {
             return
         }
-        
-        if !isMeasuring {
-            isMeasuring = true
-        }
-        
+                
         let dotNode = DotNode(position: position)
         goNextStep(fromStarting: dotNode)
         measurementView.addChildNode(dotNode)
@@ -81,9 +76,7 @@ class MeasurementViewController: UIViewController {
     
     @objc
     private func reset() {
-        isMeasuring = false
         draft.reset()
-//        updateStepInfoLabelText()
     }
 
     // MARK: - UI Updates
@@ -99,7 +92,7 @@ class MeasurementViewController: UIViewController {
 
 // MARK: - Distance calculation
 
-extension MeasurementViewController {
+extension ARMeasurementViewController {
     private func calculateCurrentDistance() -> Double? {
         let fromDotNode = draft.startDotNode
 
@@ -127,7 +120,7 @@ extension MeasurementViewController {
 
 // MARK: - Line Drawing
 
-extension MeasurementViewController {
+extension ARMeasurementViewController {
     private func drawLineIfNeeded() {
         if draft.measurement.isCompleted {
             return
@@ -144,7 +137,7 @@ extension MeasurementViewController {
 
 // MARK: - Step Updates
 
-extension MeasurementViewController {
+extension ARMeasurementViewController {
     private func goNextStep(fromStarting dotNode: DotNode) {
         draft.goNextStep(fromStarting: dotNode)
     }
@@ -156,7 +149,7 @@ extension MeasurementViewController {
 
 // MARK: - Position calculation between world and UI
 
-extension MeasurementViewController {
+extension ARMeasurementViewController {
     private func nearestCenterWorldPositionOnAvailablePlanes() -> simd_float4x4? {
         let results = measurementView.hitTest(
             view.center,
@@ -173,7 +166,7 @@ extension MeasurementViewController {
 
 // MARK: ARSCNViewDelegate
 
-extension MeasurementViewController: ARSCNViewDelegate {
+extension ARMeasurementViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         DispatchQueue.main.async {
             self.addPlaneFor(node, anchor)
@@ -194,7 +187,7 @@ extension MeasurementViewController: ARSCNViewDelegate {
     }
         
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        if !isMeasuring || draft.measurement.isCompleted {
+        if draft.measurement.isCompleted {
             return
         }
         
@@ -207,16 +200,16 @@ extension MeasurementViewController: ARSCNViewDelegate {
 
 // MARK: - ARMeasureViewDelegate
 
-extension MeasurementViewController: MeasurementViewDelegate {
-    func measurementViewDidTapUndo(_ view: MeasurementView) {
+extension ARMeasurementViewController: MeasurementViewDelegate {
+    func measurementViewDidTapUndo(_ view: ARMeasurementView) {
         goPreviousStep()
     }
     
-    func measurementViewDidTapAdd(_ view: MeasurementView) {
+    func measurementViewDidTapAdd(_ view: ARMeasurementView) {
         createDotNode()
     }
     
-    func measurementViewDidTapClear(_ view: MeasurementView) {
+    func measurementViewDidTapClear(_ view: ARMeasurementView) {
         reset()
     }
 }

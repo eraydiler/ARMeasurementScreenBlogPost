@@ -15,7 +15,7 @@
 		F96AC3AC2481AE4F00D843D0 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96AC3AB2481AE4F00D843D0 /* UIView+Constraints.swift */; };
 		F9720BEB247B08E10070C4DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9720BEA247B08E10070C4DF /* AppDelegate.swift */; };
 		F9720BED247B08E10070C4DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9720BEC247B08E10070C4DF /* SceneDelegate.swift */; };
-		F9720BEF247B08E10070C4DF /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9720BEE247B08E10070C4DF /* MeasurementViewController.swift */; };
+		F9720BEF247B08E10070C4DF /* ARMeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9720BEE247B08E10070C4DF /* ARMeasurementViewController.swift */; };
 		F9720BF4247B08E20070C4DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9720BF3247B08E20070C4DF /* Assets.xcassets */; };
 		F9720BF7247B08E20070C4DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9720BF5247B08E20070C4DF /* LaunchScreen.storyboard */; };
 		F9B1AE57248DAC1B00BCD4D6 /* ARMeasurementDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1AE56248DAC1B00BCD4D6 /* ARMeasurementDraft.swift */; };
@@ -25,7 +25,7 @@
 		F9B1AE61248DB81800BCD4D6 /* Assets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F9B1AE60248DB81800BCD4D6 /* Assets.scnassets */; };
 		F9B1AE63248DB98300BCD4D6 /* PlaneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1AE62248DB98300BCD4D6 /* PlaneNode.swift */; };
 		F9B1AE68248DBADE00BCD4D6 /* MeasurementViewController+VisualDebugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1AE67248DBADE00BCD4D6 /* MeasurementViewController+VisualDebugging.swift */; };
-		F9B7D1D22481919E00DDD48F /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7D1D12481919E00DDD48F /* MeasurementView.swift */; };
+		F9B7D1D22481919E00DDD48F /* ARMeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7D1D12481919E00DDD48F /* ARMeasurementView.swift */; };
 		F9B7D1D4248191E900DDD48F /* ARSceneView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7D1D3248191E900DDD48F /* ARSceneView+Additions.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +39,7 @@
 		F9720BE7247B08E10070C4DF /* ARMeasurementScreenBlogPost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMeasurementScreenBlogPost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9720BEA247B08E10070C4DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9720BEC247B08E10070C4DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F9720BEE247B08E10070C4DF /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
+		F9720BEE247B08E10070C4DF /* ARMeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasurementViewController.swift; sourceTree = "<group>"; };
 		F9720BF3247B08E20070C4DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9720BF6247B08E20070C4DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F9720BF8247B08E20070C4DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 		F9B1AE60248DB81800BCD4D6 /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
 		F9B1AE62248DB98300BCD4D6 /* PlaneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneNode.swift; sourceTree = "<group>"; };
 		F9B1AE67248DBADE00BCD4D6 /* MeasurementViewController+VisualDebugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MeasurementViewController+VisualDebugging.swift"; sourceTree = "<group>"; };
-		F9B7D1D12481919E00DDD48F /* MeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
+		F9B7D1D12481919E00DDD48F /* ARMeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasurementView.swift; sourceTree = "<group>"; };
 		F9B7D1D3248191E900DDD48F /* ARSceneView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARSceneView+Additions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,7 +122,7 @@
 		F9B1AE64248DBA7C00BCD4D6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F9720BEE247B08E10070C4DF /* MeasurementViewController.swift */,
+				F9720BEE247B08E10070C4DF /* ARMeasurementViewController.swift */,
 				F95EBA3F24C88B760022AA6E /* MeasurementViewController+ARSessionDelegate.swift */,
 				F9B1AE67248DBADE00BCD4D6 /* MeasurementViewController+VisualDebugging.swift */,
 			);
@@ -132,7 +132,7 @@
 		F9B1AE65248DBA8A00BCD4D6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F9B7D1D12481919E00DDD48F /* MeasurementView.swift */,
+				F9B7D1D12481919E00DDD48F /* ARMeasurementView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -229,12 +229,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9B1AE57248DAC1B00BCD4D6 /* ARMeasurementDraft.swift in Sources */,
-				F9720BEF247B08E10070C4DF /* MeasurementViewController.swift in Sources */,
+				F9720BEF247B08E10070C4DF /* ARMeasurementViewController.swift in Sources */,
 				F9B1AE68248DBADE00BCD4D6 /* MeasurementViewController+VisualDebugging.swift in Sources */,
 				F95EBA4024C88B760022AA6E /* MeasurementViewController+ARSessionDelegate.swift in Sources */,
 				F95EBA3A24C885480022AA6E /* Array+Additions.swift in Sources */,
 				F95EBA3E24C889700022AA6E /* ARMeasurementFormatter.swift in Sources */,
-				F9B7D1D22481919E00DDD48F /* MeasurementView.swift in Sources */,
+				F9B7D1D22481919E00DDD48F /* ARMeasurementView.swift in Sources */,
 				F9B7D1D4248191E900DDD48F /* ARSceneView+Additions.swift in Sources */,
 				F96AC3AC2481AE4F00D843D0 /* UIView+Constraints.swift in Sources */,
 				F9720BEB247B08E10070C4DF /* AppDelegate.swift in Sources */,
