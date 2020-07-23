@@ -19,7 +19,7 @@ final class DotNode: SCNNode {
         
         let sphere = SCNSphere(radius: 0.003)
         
-        sphere.firstMaterial?.diffuse.contents = UIColor(named: "primaryYellow")
+        sphere.firstMaterial?.diffuse.contents = UIColor.white
         sphere.firstMaterial?.lightingModel = .constant
         sphere.firstMaterial?.isDoubleSided = true
         

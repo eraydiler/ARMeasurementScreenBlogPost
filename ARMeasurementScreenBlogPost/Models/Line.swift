@@ -25,7 +25,7 @@ final class Line {
             toVector: toVector,
             radius: 0.001,
             radSegmentCount: 16,
-            color: UIColor(named: "primaryYellow") ?? UIColor.yellow
+            color: UIColor.yellow
         )
         textNode = SCNNode()
 
@@ -44,7 +44,7 @@ final class Line {
         text.extrusionDepth = 0.4
         text.chamferRadius = 0.1
         text.font = .systemFont(ofSize: 5, weight: .bold)
-        text.firstMaterial?.diffuse.contents = UIColor(named: "primaryYellow")
+        text.firstMaterial?.diffuse.contents = UIColor.white
         text.alignmentMode = CATextLayerAlignmentMode.center.rawValue
         text.truncationMode = CATextLayerTruncationMode.middle.rawValue
         text.firstMaterial?.isDoubleSided = true
@@ -60,11 +60,6 @@ final class Line {
         constraint.isGimbalLockEnabled = true
         textNode.constraints = [constraint]
         
-//        textNode.position = SCNVector3(
-//            (fromVector.x + toVector.x) / 2.0,
-//            (fromVector.y + toVector.y) / 2.0,
-//            (fromVector.z + toVector.z) / 2.0
-//        )
         textNode.position = toVector
     }
     

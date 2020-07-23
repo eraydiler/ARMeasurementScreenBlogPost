@@ -12,11 +12,10 @@ class ARMeasurementDraft {
     
     // MARK: - Properties
 
-    var startDotNode: DotNode?
-    var endDotNode: DotNode?
-    var line: Line?
-    
-    private(set) var measurement = ARMeasurement()
+    private var startDotNode: DotNode?
+    private var endDotNode: DotNode?
+    private var line: Line?
+    private var measurement = ARMeasurement()
 
     // MARK: - Computed properties
     
@@ -81,31 +80,39 @@ extension ARMeasurementDraft {
 
         measurement.goPreviousStep()
     }
-    
-    func setDistance(_ distance: Double?) {
-        guard let distance = distance else { return }
-        
-        var measurement = Measurement(value: distance, unit: UnitLength.meters)
-        
-        if Locale.current.usesMetricSystem {
-            measurement = measurement.converted(to: UnitLength.centimeters)
-        } else {
-            measurement = measurement.converted(to: UnitLength.inches)
+}
+
+// MARK: - Dot node creation
+
+extension ARMeasurementDraft {
+    func addDotNode(to position: SCNVector3?) -> DotNode? {
+        if measurement.isCompleted {
+            return nil
         }
         
-        let distanceText = ARMeasurementFormatter().string(from: measurement)
-        
-        switch self.measurement.currentStep {
-        case .first:
-            break
-        case .second:
-            line?.textString = distanceText
-        case .last:
-            break
+        guard let position = position else {
+            return nil
         }
+                
+        return DotNode(position: position)
     }
-    
-    func addLine(
+}
+
+// MARK: - Line Drawing
+
+extension ARMeasurementDraft {
+    func drawLineIfNeeded(
+        to position: SCNVector3?,
+        withPointOfView pointOfView: SCNNode?
+    ) -> Line? {
+        if measurement.isCompleted {
+            return nil
+        }
+        
+        return addLine(to: position, withPointOfView: pointOfView)
+    }
+
+    private func addLine(
         to position: SCNVector3?,
         withPointOfView pointOfView: SCNNode?
     ) -> Line? {
@@ -129,5 +136,62 @@ extension ARMeasurementDraft {
         self.line = line
         
         return line
+    }
+}
+
+// MARK: - Distance calculation
+
+extension ARMeasurementDraft {
+    func updateCurrentDistanceIfNeeded(to position: SCNVector3?) {
+        if measurement.isCompleted {
+            return
+        }
+
+        guard
+            let fromPosition = startDotNode?.position,
+            let toPosition = position
+            else {
+                return
+        }
+
+        let distance = calculateDistance(from: fromPosition, to: toPosition)
+        setDistance(distance)
+    }
+    
+    private func calculateDistance(
+        from fromVector: SCNVector3,
+        to toVector: SCNVector3
+    ) -> Double {
+        // ARKit is using meter for length/width/height
+        let distanceInMeters = sqrt(
+            (fromVector.x - toVector.x) * (fromVector.x - toVector.x)
+                + (fromVector.y - toVector.y) * (fromVector.y - toVector.y)
+                + (fromVector.z - toVector.z) * (fromVector.z - toVector.z)
+        )
+                
+        return Double(distanceInMeters)
+    }
+    
+    private func setDistance(_ distance: Double?) {
+        guard let distance = distance else { return }
+        
+        var measurement = Measurement(value: distance, unit: UnitLength.meters)
+        
+        if Locale.current.usesMetricSystem {
+            measurement = measurement.converted(to: UnitLength.centimeters)
+        } else {
+            measurement = measurement.converted(to: UnitLength.inches)
+        }
+        
+        let distanceText = ARMeasurementFormatter().string(from: measurement)
+        
+        switch self.measurement.currentStep {
+        case .first:
+            break
+        case .second:
+            line?.textString = distanceText
+        case .last:
+            break
+        }
     }
 }
