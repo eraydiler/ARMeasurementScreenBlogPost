@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F95EBA3824C8802F0022AA6E /* simd_float4x4+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3724C8802F0022AA6E /* simd_float4x4+Addition.swift */; };
 		F95EBA3A24C885480022AA6E /* Array+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3924C885480022AA6E /* Array+Additions.swift */; };
 		F95EBA3C24C8855F0022AA6E /* ARMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3B24C8855F0022AA6E /* ARMeasurement.swift */; };
 		F95EBA3E24C889700022AA6E /* ARMeasurementFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3D24C889700022AA6E /* ARMeasurementFormatter.swift */; };
@@ -30,7 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F95EBA3724C8802F0022AA6E /* simd_float4x4+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_float4x4+Addition.swift"; sourceTree = "<group>"; };
 		F95EBA3924C885480022AA6E /* Array+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Additions.swift"; sourceTree = "<group>"; };
 		F95EBA3B24C8855F0022AA6E /* ARMeasurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasurement.swift; sourceTree = "<group>"; };
 		F95EBA3D24C889700022AA6E /* ARMeasurementFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasurementFormatter.swift; sourceTree = "<group>"; };
@@ -88,7 +86,7 @@
 				F9B7D1D5248191F700DDD48F /* Extensions */,
 				F9B1AE53248D90B800BCD4D6 /* Delegates */,
 				F9B1AE5E248DB49400BCD4D6 /* Models */,
-				F9B1AE65248DBA8A00BCD4D6 /* View */,
+				F9B1AE65248DBA8A00BCD4D6 /* Views */,
 				F9B1AE66248DBA9500BCD4D6 /* Assets */,
 				F9720BF5247B08E20070C4DF /* LaunchScreen.storyboard */,
 				F9720BF8247B08E20070C4DF /* Info.plist */,
@@ -129,12 +127,12 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		F9B1AE65248DBA8A00BCD4D6 /* View */ = {
+		F9B1AE65248DBA8A00BCD4D6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F9B7D1D12481919E00DDD48F /* ARMeasurementView.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F9B1AE66248DBA9500BCD4D6 /* Assets */ = {
@@ -150,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				F9B7D1D3248191E900DDD48F /* ARSceneView+Additions.swift */,
-				F95EBA3724C8802F0022AA6E /* simd_float4x4+Addition.swift */,
 				F96AC3AB2481AE4F00D843D0 /* UIView+Constraints.swift */,
 				F95EBA3924C885480022AA6E /* Array+Additions.swift */,
 			);
@@ -241,7 +238,6 @@
 				F9B1AE63248DB98300BCD4D6 /* PlaneNode.swift in Sources */,
 				F9B1AE59248DAC7000BCD4D6 /* DotNode.swift in Sources */,
 				F95EBA3C24C8855F0022AA6E /* ARMeasurement.swift in Sources */,
-				F95EBA3824C8802F0022AA6E /* simd_float4x4+Addition.swift in Sources */,
 				F9720BED247B08E10070C4DF /* SceneDelegate.swift in Sources */,
 				F9B1AE5D248DACD200BCD4D6 /* CylinderLineNode.swift in Sources */,
 				F9B1AE5B248DACAF00BCD4D6 /* Line.swift in Sources */,

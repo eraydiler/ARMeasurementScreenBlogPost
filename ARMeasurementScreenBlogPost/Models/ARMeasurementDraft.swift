@@ -42,10 +42,6 @@ class ARMeasurementDraft {
 // MARK: - Public
 
 extension ARMeasurementDraft {
-//    var info: String {
-//        return measurement.info(forLength: distances.first)
-//    }
-
     func reset() {
         allNodes.forEach { $0.removeFromParentNode() }
         startDotNode = nil

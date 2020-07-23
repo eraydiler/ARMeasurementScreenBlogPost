@@ -23,4 +23,8 @@ extension ARSCNView {
 
         return hitVector
     }
+    
+    func centerRealWorldPosition() -> SCNVector3? {
+        realWorldPosition(for: center)
+    }
 }

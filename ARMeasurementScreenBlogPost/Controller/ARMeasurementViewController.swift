@@ -59,13 +59,12 @@ class ARMeasurementViewController: UIViewController {
     
     // MARK: - Actions
     
-    @objc
     private func createDotNode() {
         if draft.measurement.isCompleted {
             return
         }
         
-        guard let position = centerDotWorldPositionOnExistingPlanes() else {
+        guard let position = measurementView.centerRealWorldPosition() else {
             return
         }
                 
@@ -74,7 +73,6 @@ class ARMeasurementViewController: UIViewController {
         measurementView.addChildNode(dotNode)
     }
     
-    @objc
     private func reset() {
         draft.reset()
     }
@@ -98,7 +96,7 @@ extension ARMeasurementViewController {
 
         guard
             let fromPosition = fromDotNode?.position,
-            let toPosition = centerDotWorldPositionOnExistingPlanes()
+            let toPosition = measurementView.centerRealWorldPosition()
             else {
                 return nil
         }
@@ -127,7 +125,7 @@ extension ARMeasurementViewController {
         }
         
         let line = draft.addLine(
-            to: centerDotWorldPositionOnExistingPlanes(),
+            to: measurementView.centerRealWorldPosition(),
             withPointOfView: measurementView.pointOfView
         )
         
@@ -144,23 +142,6 @@ extension ARMeasurementViewController {
     
     private func goPreviousStep() {
         draft.goPreviousStep()
-    }
-}
-
-// MARK: - Position calculation between world and UI
-
-extension ARMeasurementViewController {
-    private func nearestCenterWorldPositionOnAvailablePlanes() -> simd_float4x4? {
-        let results = measurementView.hitTest(
-            view.center,
-            types: [ .featurePoint, .existingPlaneUsingExtent ]
-        )
-        
-        return results.first?.worldTransform
-    }
-    
-    private func centerDotWorldPositionOnExistingPlanes() -> SCNVector3? {
-        return nearestCenterWorldPositionOnAvailablePlanes()?.toSCNVector3()
     }
 }
 
