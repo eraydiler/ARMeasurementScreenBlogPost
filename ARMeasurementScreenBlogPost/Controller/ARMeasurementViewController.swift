@@ -39,6 +39,8 @@ class ARMeasurementViewController: UIViewController {
         super.viewWillDisappear(animated)
         measurementView.pauseSession()
     }
+    
+    // MARK: - Setup
 
     private func setListeners() {
         measurementView.delegate = self

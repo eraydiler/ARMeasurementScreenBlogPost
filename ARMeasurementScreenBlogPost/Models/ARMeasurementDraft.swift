@@ -139,7 +139,7 @@ extension ARMeasurementDraft {
     }
 }
 
-// MARK: - Distance calculation
+// MARK: - Setting distance
 
 extension ARMeasurementDraft {
     func updateCurrentDistanceIfNeeded(to position: SCNVector3?) {
@@ -154,24 +154,9 @@ extension ARMeasurementDraft {
                 return
         }
 
-        let distance = calculateDistance(from: fromPosition, to: toPosition)
-        setDistance(distance)
+        setDistance(fromPosition.distance(to: toPosition))
     }
-    
-    private func calculateDistance(
-        from fromVector: SCNVector3,
-        to toVector: SCNVector3
-    ) -> Double {
-        // ARKit is using meter for length/width/height
-        let distanceInMeters = sqrt(
-            (fromVector.x - toVector.x) * (fromVector.x - toVector.x)
-                + (fromVector.y - toVector.y) * (fromVector.y - toVector.y)
-                + (fromVector.z - toVector.z) * (fromVector.z - toVector.z)
-        )
-                
-        return Double(distanceInMeters)
-    }
-    
+        
     private func setDistance(_ distance: Double?) {
         guard let distance = distance else { return }
         

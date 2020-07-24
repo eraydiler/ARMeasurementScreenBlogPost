@@ -19,7 +19,11 @@ extension ARSCNView {
         let hitTransform = SCNMatrix4(hitResult.worldTransform)
 
         // m4x -> position 1: x, 2: y, 3: z
-        let hitVector = SCNVector3Make(hitTransform.m41, hitTransform.m42, hitTransform.m43)
+        let hitVector = SCNVector3Make(
+            hitTransform.m41,
+            hitTransform.m42,
+            hitTransform.m43
+        )
 
         return hitVector
     }

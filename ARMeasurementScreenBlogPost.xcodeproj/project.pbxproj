@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F93F5D7624CB081500A2BB4F /* SCNVector3+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93F5D7524CB081500A2BB4F /* SCNVector3+Additions.swift */; };
 		F95EBA3A24C885480022AA6E /* Array+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3924C885480022AA6E /* Array+Additions.swift */; };
 		F95EBA3C24C8855F0022AA6E /* ARMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3B24C8855F0022AA6E /* ARMeasurement.swift */; };
 		F95EBA3E24C889700022AA6E /* ARMeasurementFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EBA3D24C889700022AA6E /* ARMeasurementFormatter.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F93F5D7524CB081500A2BB4F /* SCNVector3+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Additions.swift"; sourceTree = "<group>"; };
 		F95EBA3924C885480022AA6E /* Array+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Additions.swift"; sourceTree = "<group>"; };
 		F95EBA3B24C8855F0022AA6E /* ARMeasurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasurement.swift; sourceTree = "<group>"; };
 		F95EBA3D24C889700022AA6E /* ARMeasurementFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasurementFormatter.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				F9B7D1D3248191E900DDD48F /* ARSceneView+Additions.swift */,
 				F96AC3AB2481AE4F00D843D0 /* UIView+Constraints.swift */,
 				F95EBA3924C885480022AA6E /* Array+Additions.swift */,
+				F93F5D7524CB081500A2BB4F /* SCNVector3+Additions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				F95EBA3A24C885480022AA6E /* Array+Additions.swift in Sources */,
 				F95EBA3E24C889700022AA6E /* ARMeasurementFormatter.swift in Sources */,
 				F9B7D1D22481919E00DDD48F /* ARMeasurementView.swift in Sources */,
+				F93F5D7624CB081500A2BB4F /* SCNVector3+Additions.swift in Sources */,
 				F9B7D1D4248191E900DDD48F /* ARSceneView+Additions.swift in Sources */,
 				F96AC3AC2481AE4F00D843D0 /* UIView+Constraints.swift in Sources */,
 				F9720BEB247B08E10070C4DF /* AppDelegate.swift in Sources */,

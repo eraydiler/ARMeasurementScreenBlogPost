@@ -261,7 +261,7 @@ extension ARMeasurementView {
                self.addIndicatorNode()
             }
 
-            guard let centerRealWorldPosition = self.realWorldPosition(for: self.center) else {
+            guard let centerRealWorldPosition = self.centerRealWorldPosition() else {
                 self.removeIndicatorNode()
                 return
             }
