@@ -14,12 +14,15 @@ final class Line {
     // MARK: - Properties
     
     private let lineNode: CylinderLineNode
-    private let textNode: SCNNode
-    private var text = SCNText()
+    private let textNode: TextNode
     
     // MARK: - Initializations
     
-    init(fromVector: SCNVector3, toVector: SCNVector3, pointOfView: SCNNode?) {
+    init(
+        fromVector: SCNVector3,
+        toVector: SCNVector3,
+        pointOfView: SCNNode?
+    ) {
         lineNode = CylinderLineNode(
             fromVector: fromVector,
             toVector: toVector,
@@ -27,40 +30,12 @@ final class Line {
             radSegmentCount: 16,
             color: UIColor.yellow
         )
-        textNode = SCNNode()
-
-        setupTextNode(fromVector: fromVector, toVector: toVector, pointOfView: pointOfView)
-    }
-    
-    init() {
-        lineNode = CylinderLineNode()
-        textNode = SCNNode()
-        text = SCNText()
-    }
-    
-    // MARK: - Setup
-    
-    private func setupTextNode(fromVector: SCNVector3, toVector: SCNVector3, pointOfView: SCNNode?) {
-        text.extrusionDepth = 0.4
-        text.chamferRadius = 0.1
-        text.font = .systemFont(ofSize: 5, weight: .bold)
-        text.firstMaterial?.diffuse.contents = UIColor.white
-        text.alignmentMode = CATextLayerAlignmentMode.center.rawValue
-        text.truncationMode = CATextLayerTruncationMode.middle.rawValue
-        text.firstMaterial?.isDoubleSided = true
         
-        let textWrapperNode = SCNNode(geometry: text)
-        
-        textWrapperNode.eulerAngles = SCNVector3Make(0, .pi, 0)
-        textWrapperNode.scale = SCNVector3(1 / 500.0, 1 / 500.0, 1 / 500.0)
-        textNode.addChildNode(textWrapperNode)
-        
-        let constraint = SCNLookAtConstraint(target: pointOfView)
-        
-        constraint.isGimbalLockEnabled = true
-        textNode.constraints = [constraint]
-        
-        textNode.position = toVector
+        textNode = TextNode(
+            fromVector: fromVector,
+            toVector: toVector,
+            pointOfView: pointOfView
+        )
     }
     
     // MARK: - Helpers
@@ -71,15 +46,73 @@ final class Line {
     
     var textString: String? {
         get {
-            return text.string as? String ?? nil
+            return textNode.text
         }
         set {
-            text.string = newValue
+            textNode.text = newValue
         }
     }
     
     func removeFromParentNode() {
         lineNode.removeFromParentNode()
         textNode.removeFromParentNode()
+    }
+}
+
+private final class TextNode: SCNNode {
+    private var textGeometry = SCNText()
+    private lazy var textWrapperNode = SCNNode(geometry: textGeometry)
+
+    init(
+        fromVector: SCNVector3,
+        toVector: SCNVector3,
+        pointOfView: SCNNode?
+    ) {
+        super.init()
+        
+        customizeTextNode(
+            fromVector: fromVector,
+            toVector: toVector,
+            pointOfView: pointOfView
+        )
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func customizeTextNode(
+        fromVector: SCNVector3,
+        toVector: SCNVector3,
+        pointOfView: SCNNode?
+    ) {
+        textGeometry.extrusionDepth = 0.4
+        textGeometry.chamferRadius = 0.1
+        textGeometry.font = .systemFont(ofSize: 5, weight: .bold)
+        textGeometry.firstMaterial?.diffuse.contents = UIColor.white
+        textGeometry.alignmentMode = CATextLayerAlignmentMode.center.rawValue
+        textGeometry.truncationMode = CATextLayerTruncationMode.middle.rawValue
+        textGeometry.firstMaterial?.isDoubleSided = true
+                
+        textWrapperNode.eulerAngles = SCNVector3Make(0, .pi, 0)
+        textWrapperNode.scale = SCNVector3(1 / 500.0, 1 / 500.0, 1 / 500.0)
+        addChildNode(textWrapperNode)
+        
+        let constraint = SCNLookAtConstraint(target: pointOfView)
+        constraint.isGimbalLockEnabled = true
+        
+        constraints = [constraint]
+        position = toVector
+    }
+}
+
+extension TextNode {
+    var text: String? {
+        get {
+            return textGeometry.string as? String ?? nil
+        }
+        set {
+            textGeometry.string = newValue
+        }
     }
 }

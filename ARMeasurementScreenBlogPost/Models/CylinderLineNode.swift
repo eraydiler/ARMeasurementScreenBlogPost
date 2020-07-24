@@ -31,7 +31,7 @@ class CylinderLineNode: SCNNode {
         cylinder.radialSegmentCount = radSegmentCount
         cylinder.firstMaterial?.diffuse.contents = color
         
-        let nodeCylinder = SCNNode(geometry: cylinder )
+        let nodeCylinder = SCNNode(geometry: cylinder)
         nodeCylinder.position.y = -Float(height / 2)
         zAlign.addChildNode(nodeCylinder)
         
