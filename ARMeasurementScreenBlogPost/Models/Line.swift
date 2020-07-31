@@ -32,8 +32,7 @@ final class Line {
         )
         
         textNode = TextNode(
-            fromVector: fromVector,
-            toVector: toVector,
+            vector: toVector,
             pointOfView: pointOfView
         )
     }
@@ -64,15 +63,13 @@ private final class TextNode: SCNNode {
     private lazy var textWrapperNode = SCNNode(geometry: textGeometry)
 
     init(
-        fromVector: SCNVector3,
-        toVector: SCNVector3,
+        vector: SCNVector3,
         pointOfView: SCNNode?
     ) {
         super.init()
         
-        customizeTextNode(
-            fromVector: fromVector,
-            toVector: toVector,
+        customizeTextNodeFor(
+            vector: vector,
             pointOfView: pointOfView
         )
     }
@@ -81,9 +78,8 @@ private final class TextNode: SCNNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func customizeTextNode(
-        fromVector: SCNVector3,
-        toVector: SCNVector3,
+    private func customizeTextNodeFor(
+        vector: SCNVector3,
         pointOfView: SCNNode?
     ) {
         textGeometry.extrusionDepth = 0.4
@@ -102,7 +98,7 @@ private final class TextNode: SCNNode {
         constraint.isGimbalLockEnabled = true
         
         constraints = [constraint]
-        position = toVector
+        position = vector
     }
 }
 

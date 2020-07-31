@@ -256,19 +256,17 @@ extension ARMeasurementView {
     }
     
     func resetIndicatorPosition() {
-        DispatchQueue.main.async {
-            if self.indicatorNode.parent == nil {
-               self.addIndicatorNode()
-            }
-
-            guard let centerRealWorldPosition = self.centerRealWorldPosition() else {
-                self.removeIndicatorNode()
-                return
-            }
-            
-            self.indicatorNode.eulerAngles.x = -.pi / 2
-            self.indicatorNode.position = centerRealWorldPosition
+        if self.indicatorNode.parent == nil {
+            self.addIndicatorNode()
         }
+        
+        guard let centerRealWorldPosition = self.centerRealWorldPosition() else {
+            self.removeIndicatorNode()
+            return
+        }
+        
+        self.indicatorNode.eulerAngles.x = -.pi / 2
+        self.indicatorNode.position = centerRealWorldPosition
     }
 }
 

@@ -43,16 +43,19 @@ extension ARMeasurementViewController: ARSessionDelegate {
 // MARK: - Info
 
 extension ARMeasurementViewController {
-    private func updateSessionInfoLabel(for frame: ARFrame, trackingState: ARCamera.TrackingState) {
+    private func updateSessionInfoLabel(
+        for frame: ARFrame,
+        trackingState: ARCamera.TrackingState
+    ) {
         // Update the UI to provide feedback on the state of the AR experience.
         let message: String
         
         switch trackingState {
         case .normal where frame.anchors.isEmpty, // No planes detected
-        .limited(.excessiveMotion),
-        .limited(.initializing),
-        .limited(.insufficientFeatures),
-        .notAvailable:
+             .limited(.excessiveMotion),
+             .limited(.initializing),
+             .limited(.insufficientFeatures),
+             .notAvailable:
             message = "Move your phone on a flat surface until it's detected"
             
         default:

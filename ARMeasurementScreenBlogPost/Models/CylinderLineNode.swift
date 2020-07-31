@@ -21,22 +21,21 @@ class CylinderLineNode: SCNNode {
         let height = fromVector.distance(to: toVector)
         position = fromVector
         
-        let nodeV2 = SCNNode()
-        nodeV2.position = toVector
-        
-        let zAlign = SCNNode()
-        zAlign.eulerAngles.x = Float(CGFloat.pi / 2)
+        let zAlignNode = SCNNode()
+        zAlignNode.eulerAngles.x = Float(CGFloat.pi / 2)
         
         let cylinder = SCNCylinder(radius: radius, height: CGFloat(height))
         cylinder.radialSegmentCount = radSegmentCount
         cylinder.firstMaterial?.diffuse.contents = color
         
-        let nodeCylinder = SCNNode(geometry: cylinder)
-        nodeCylinder.position.y = -Float(height / 2)
-        zAlign.addChildNode(nodeCylinder)
+        let cylinderNode = SCNNode(geometry: cylinder)
+        cylinderNode.position.y = -Float(height / 2)
+        zAlignNode.addChildNode(cylinderNode)
         
-        addChildNode(zAlign)
+        addChildNode(zAlignNode)
         
+        let nodeV2 = SCNNode()
+        nodeV2.position = toVector
         constraints = [SCNLookAtConstraint(target: nodeV2)]
     }
     
